@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--<suite name="TADashBoard Selenide" verbose="1" thread-count="${dataproviderthreadcount}" parallel="classes">-->
+<suite name="Regression Selenide" verbose="1" thread-count="1" parallel="tests">
+    <listeners>
+        <listener class-name="listeners.TestListener"/>
+        <listener class-name="listeners.AnnotationTransformerListener"/>
+    </listeners>
+
+    <test name="Regression on chrome">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="headless" value="false"/>
+        <classes>
+            <class name="testDef"/>
+            <class name="testAbc"/>
+        </classes>
+    </test>
+</suite>
