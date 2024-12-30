@@ -1,40 +1,36 @@
-package pom.vietjet;
+package pages.vietjet;
 
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
+import utils.I18nHelper;
 
 import java.util.Date;
 
 import static com.codeborne.selenide.Selenide.*;
+import static pages.vietjet.Constant.URL_HOME;
 
 public class HomePage {
     private String returnRadioButton = "(//input[@value='roundTrip'])[1]";
     private String oneWayRadioButton = "(//input[@value='oneway'])[1]";
-    private String fromTextBox = "(//label[text()='From' or text()='Điểm khởi hành']/following-sibling::div/input)[1]";
-    private String toTextBox = "(//label[text()='To' or text()='Điểm đến']/following-sibling::div/input)[1]";
-    private String passengerDropdown = "//label[text()='Passenger' or text()='Hành khách']/following-sibling::div/input";
-    private String searchTicketButton = "//button/span[text()=\"Let's go\" or text()='Tìm chuyến bay']";
+    private String fromTextBox = String.format("(//label[text()='%s']/following-sibling::div/input)[1]", I18nHelper.getString("from"));
+    private String toTextBox = String.format("(//label[text()='%s']/following-sibling::div/input)[1]", I18nHelper.getString("to"));
+    private String passengerDropdown = String.format("//label[text()='%s']/following-sibling::div/input", I18nHelper.getString("passenger"));
+    private String searchTicketButton = String.format("//button/span[text()='%s']", I18nHelper.getString("findTicket"));
     private String cityCode = "//div[@translate='no' and text()='%s']";
-    private String minusAdultsButton = "//div[p[contains(text(), '12')]]/parent::div/following-sibling::div/button[1]";
-    private String plusAdultsButton = "//div[p[contains(text(), '12')]]/parent::div/following-sibling::div/button[2]";
-    private String minusChildrenButton = "//div[p[contains(text(), '2-11')]]/parent::div/following-sibling::div/button[1]";
-    private String plusChildrenButton = "//div[p[contains(text(), '2-11')]]/parent::div/following-sibling::div/button[2]";
-    private String minusInfantsButton = "//div[p[contains(text(), ' 2 ')]]/parent::div/following-sibling::div/button[1]";
-    private String plusInfantsButton = "//div[p[contains(text(), ' 2 ')]]/parent::div/following-sibling::div/button[2]";
+    private String minusAdultsButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[1]", I18nHelper.getString("adults"));
+    private String plusAdultsButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[2]", I18nHelper.getString("adults"));
+    private String minusChildrenButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[1]", I18nHelper.getString("childrens"));
+    private String plusChildrenButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[2]", I18nHelper.getString("childrens"));
+    private String minusInfantsButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[1]", I18nHelper.getString("infants"));
+    private String plusInfantsButton = String.format("//div[p[text()='%s']]/parent::div/following-sibling::div/button[2]", I18nHelper.getString("infants"));
     private String adultsAmount = minusAdultsButton + "/following-sibling::span";
     private String childrenAmount = minusChildrenButton + "/following-sibling::span";
     private String infantsAmount = minusInfantsButton + "/following-sibling::span";
-    private String departureDatePicker = "(//p[text()='Departure date' or text()='Ngày đi'])[1]";
-    private String returnDatePicker = "(//p[text()='Return Date' or text()='Ngày về'])[1]";
+    private String departureDatePicker = String.format("(//p[text()='%s'])[1]", I18nHelper.getString("departureDate"));
+    private String returnDatePicker = String.format("(//p[text()='%s'])[1]", I18nHelper.getString("returnDate"));
 
-    @Step("Navigate to Google page")
-    public void openGooglePage() {
-        open("https://www.google.com.vn/");
-    }
-
-    @Step("Type ...")
-    public void enterText() {
-        $(By.name("q")).type("Hello");
+    @Step("Navigate to VietJet home page")
+    public void openHomePage() {
+        open(String.format(URL_HOME + "%s", I18nHelper.getLocale()));
     }
 
     public void selectReturnFlight() {

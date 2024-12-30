@@ -10,8 +10,7 @@
         <parameter name="browser" value="chrome"/>
         <parameter name="headless" value="false"/>
         <classes>
-            <class name="testDef"/>
-            <class name="testAbc"/>
+            <class name="projects.vietjet.TC001"/>
         </classes>
     </test>
 </suite>
